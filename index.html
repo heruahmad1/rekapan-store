@@ -92,6 +92,10 @@
             <td colspan="3">Total</td>
             <td id="total">Rp 0</td>
           </tr>
+          <tr class="total-row">
+            <td colspan="3">Total Jumlah Order</td>
+            <td id="total-order">0</td>
+          </tr>
         </tfoot>
       </table>
     </form>
@@ -109,15 +113,19 @@
     function hitungTotal() {
       const produkList = ["jumbo", "lite", "big", "mini", "spj", "circle"];
       let total = 0;
+      let totalOrder = 0;
       produkList.forEach(p => {
         const jumlah = parseInt(document.getElementById(p).value) || 0;
         const harga = parseInt(document.getElementById(`harga-${p}`).value) || 0;
         total += jumlah * harga;
+        totalOrder += jumlah;
       });
       document.getElementById("total").textContent = `Rp ${total.toLocaleString("id-ID")}`;
+      document.getElementById("total-order").textContent = totalOrder;
     }
   </script>
 </body>
 </html>
+
 
 
