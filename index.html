@@ -1,3 +1,5 @@
+# Menyimpan file HTML yang telah diperbarui dan siap dikirim ke user
+html_content = """
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -37,12 +39,9 @@
     .total-row td {
       font-weight: bold;
     }
-    #total {
+    #total, #total-order {
       font-size: 1em;
       color: #007BFF;
-    }
-    #total-order {
-      font-size: 1em;
     }
     tfoot tr:first-child td {
       background-color: #e8f0fe;
@@ -141,6 +140,10 @@
             <td colspan="3">Total</td>
             <td id="total">Rp 0</td>
           </tr>
+          <tr class="total-row">
+            <td colspan="3">Total Produk Terjual</td>
+            <td id="total-order">0</td>
+          </tr>
         </tfoot>
       </table>
     </form>
@@ -158,12 +161,17 @@
     function hitungTotal() {
       const produkList = ["jumbo", "lite", "big", "mini", "custom1", "custom2", "custom3"];
       let total = 0;
+      let totalOrder = 0;
+
       produkList.forEach(p => {
         const jumlah = parseInt(document.getElementById(p).value) || 0;
         const harga = (parseInt(document.getElementById(`harga-${p}`).value) || 0) * 1000;
         total += jumlah * harga;
+        totalOrder += jumlah;
       });
+
       document.getElementById("total").textContent = `Rp ${total.toLocaleString("id-ID")}`;
+      document.getElementById("total-order").textContent = totalOrder;
     }
 
     function kirimWhatsApp() {
@@ -203,6 +211,15 @@
   </script>
 </body>
 </html>
+"""
+
+# Simpan ke file untuk user unduh
+file_path = "/mnt/data/index_total_order.html"
+with open(file_path, "w", encoding="utf-8") as file:
+    file.write(html_content)
+
+file_path
+
 
 
 
