@@ -31,7 +31,7 @@
     th {
       background-color: #f0f0f0;
     }
-    input[type="number"] {
+    input[type="number"], input[type="text"] {
       width: 70px;
     }
     .total-row td {
@@ -51,10 +51,10 @@
       width: 10%;
     }
     th:nth-child(4), td:nth-child(4) {
-      width: 45%;
+      width: 35%;
     }
     th:nth-child(3), td:nth-child(3) {
-      width: 20%;
+      width: 25%;
     }
     th:nth-child(1), td:nth-child(1) {
       width: 15%;
@@ -74,7 +74,7 @@
 </head>
 <body>
   <div class="container">
-  <h1>Rekapan HR STORE</h1>
+    <h1>Rekapan HR STORE</h1>
     <form id="sales-form">
       <label>
         Tanggal:
@@ -106,12 +106,6 @@
             <td id="subtotal-lite">Rp 0</td>
           </tr>
           <tr>
-            <td>SPJ</td>
-            <td><input type="number" id="spj" oninput="hitungSubtotal('spj')"></td>
-            <td><input type="number" id="harga-spj" oninput="hitungSubtotal('spj')"></td>
-            <td id="subtotal-spj">Rp 0</td>
-          </tr>
-          <tr>
             <td>BIG</td>
             <td><input type="number" id="big" oninput="hitungSubtotal('big')"></td>
             <td><input type="number" id="harga-big" oninput="hitungSubtotal('big')"></td>
@@ -124,24 +118,28 @@
             <td id="subtotal-mini">Rp 0</td>
           </tr>
           <tr>
-            <td>CIRCLE</td>
-            <td><input type="number" id="circle" oninput="hitungSubtotal('circle')"></td>
-            <td><input type="number" id="harga-circle" oninput="hitungSubtotal('circle')"></td>
-            <td id="subtotal-circle">Rp 0</td>
+            <td><input type="text" id="custom1-name" placeholder="Produk Lain 1"></td>
+            <td><input type="number" id="custom1" oninput="hitungSubtotal('custom1')"></td>
+            <td><input type="number" id="harga-custom1" oninput="hitungSubtotal('custom1')"></td>
+            <td id="subtotal-custom1">Rp 0</td>
+          </tr>
+          <tr>
+            <td><input type="text" id="custom2-name" placeholder="Produk Lain 2"></td>
+            <td><input type="number" id="custom2" oninput="hitungSubtotal('custom2')"></td>
+            <td><input type="number" id="harga-custom2" oninput="hitungSubtotal('custom2')"></td>
+            <td id="subtotal-custom2">Rp 0</td>
+          </tr>
+          <tr>
+            <td><input type="text" id="custom3-name" placeholder="Produk Lain 3"></td>
+            <td><input type="number" id="custom3" oninput="hitungSubtotal('custom3')"></td>
+            <td><input type="number" id="harga-custom3" oninput="hitungSubtotal('custom3')"></td>
+            <td id="subtotal-custom3">Rp 0</td>
           </tr>
         </tbody>
         <tfoot>
           <tr class="total-row">
             <td colspan="3">Total</td>
             <td id="total">Rp 0</td>
-          </tr>
-          <tr class="total-row">
-            <td colspan="3">Total Order (XXL)</td>
-            <td id="total-jumbo-group">0</td>
-          </tr>
-          <tr class="total-row">
-            <td colspan="3">Total Order (XL)</td>
-            <td id="total-big-group">0</td>
           </tr>
         </tfoot>
       </table>
@@ -158,32 +156,28 @@
     }
 
     function hitungTotal() {
-      const produkList = ["jumbo", "lite", "spj", "big", "mini", "circle"];
+      const produkList = ["jumbo", "lite", "big", "mini", "custom1", "custom2", "custom3"];
       let total = 0;
-      let totalOrderJumbo = 0;
-      let totalOrderBig = 0;
-
       produkList.forEach(p => {
         const jumlah = parseInt(document.getElementById(p).value) || 0;
         const harga = (parseInt(document.getElementById(`harga-${p}`).value) || 0) * 1000;
         total += jumlah * harga;
-
-        if (["jumbo", "lite", "spj"].includes(p)) {
-          totalOrderJumbo += jumlah;
-        }
-        if (["big", "mini"].includes(p)) {
-          totalOrderBig += jumlah;
-        }
       });
-
       document.getElementById("total").textContent = `Rp ${total.toLocaleString("id-ID")}`;
-      document.getElementById("total-jumbo-group").textContent = totalOrderJumbo;
-      document.getElementById("total-big-group").textContent = totalOrderBig;
     }
 
     function kirimWhatsApp() {
       const tanggal = document.getElementById("tanggal").value;
-      const produkList = ["jumbo", "lite", "spj", "big", "mini", "circle"];
+      const produkList = ["jumbo", "lite", "big", "mini", "custom1", "custom2", "custom3"];
+      const produkNames = {
+        jumbo: "JUMBO",
+        lite: "LITE",
+        big: "BIG",
+        mini: "MINI",
+        custom1: document.getElementById("custom1-name").value || "Lain 1",
+        custom2: document.getElementById("custom2-name").value || "Lain 2",
+        custom3: document.getElementById("custom3-name").value || "Lain 3"
+      };
 
       let pesan = `📆 Tanggal: ${tanggal}\n📦 Penjualan:`;
       let total = 0;
@@ -194,7 +188,7 @@
         const harga = (parseInt(document.getElementById(`harga-${p}`).value) || 0) * 1000;
         if (jumlah > 0) {
           const subtotal = jumlah * harga;
-          pesan += `\n- ${p.toUpperCase()}: ${jumlah} x ${harga.toLocaleString("id-ID")} = Rp ${subtotal.toLocaleString("id-ID")}`;
+          pesan += `\n- ${produkNames[p]}: ${jumlah} x ${harga.toLocaleString("id-ID")} = Rp ${subtotal.toLocaleString("id-ID")}`;
           total += subtotal;
           totalOrder += jumlah;
         }
@@ -209,6 +203,7 @@
   </script>
 </body>
 </html>
+
 
 
 
