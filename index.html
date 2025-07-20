@@ -36,17 +36,18 @@
     }
     .total-row td {
       font-weight: bold;
+      font-size: 1.2em;
+    }
+    #total {
+      font-size: 1.4em;
+      color: #007BFF;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Rekapan Penjualan</h1>
+    <h1>Rekapan HR STORE</h1>
     <form id="sales-form">
-      <label>
-        Tanggal:
-        <input type="date" id="tanggal">
-      </label>
       <label>
         Nama Seller:
         <input type="text" id="seller" placeholder="Misal: Andi">
@@ -87,7 +88,7 @@
             <td id="subtotal-mini">Rp 0</td>
           </tr>
           <tr>
-            <td>SPJ</td>
+            <td>SPR J</td>
             <td><input type="number" id="spj" oninput="hitungSubtotal('spj')"></td>
             <td><input type="number" id="harga-spj" oninput="hitungSubtotal('spj')"></td>
             <td id="subtotal-spj">Rp 0</td>
