@@ -32,7 +32,7 @@
       background-color: #f0f0f0;
     }
     input[type="number"] {
-      width: 80px;
+      width: 70px;
     }
     .total-row td {
       font-weight: bold;
@@ -48,10 +48,10 @@
       background-color: #e8f0fe;
     }
     th:nth-child(2), td:nth-child(2) {
-      width: 10%;
+      width: 10%; /* kolom jumlah diperkecil */
     }
     th:nth-child(4), td:nth-child(4) {
-      width: 35%; /* Kolom Subtotal diperbesar */
+      width: 45%; /* kolom subtotal diperbesar */
     }
     th:nth-child(3), td:nth-child(3) {
       width: 20%;
@@ -80,10 +80,8 @@
         Tanggal:
         <input type="date" id="tanggal">
       </label>
-      <label>
-        Nama Seller:
-        <input type="text" id="seller" placeholder="Misal: Andi">
-      </label>
+
+      <a href="#" class="whatsapp-button" onclick="kirimWhatsApp()">Kirim ke WhatsApp</a>
 
       <table>
         <thead>
@@ -143,14 +141,13 @@
           </tr>
         </tfoot>
       </table>
-      <a href="#" class="whatsapp-button" onclick="kirimWhatsApp()">Kirim ke WhatsApp</a>
     </form>
   </div>
 
   <script>
     function hitungSubtotal(produk) {
       const jumlah = parseInt(document.getElementById(produk).value) || 0;
-      const harga = parseInt(document.getElementById(`harga-${produk}`).value) || 0;
+      const harga = (parseInt(document.getElementById(`harga-${produk}`).value) || 0) * 1000;
       const subtotal = jumlah * harga;
       document.getElementById(`subtotal-${produk}`).textContent = `Rp ${subtotal.toLocaleString("id-ID")}`;
       hitungTotal();
@@ -162,7 +159,7 @@
       let totalOrder = 0;
       produkList.forEach(p => {
         const jumlah = parseInt(document.getElementById(p).value) || 0;
-        const harga = parseInt(document.getElementById(`harga-${p}`).value) || 0;
+        const harga = (parseInt(document.getElementById(`harga-${p}`).value) || 0) * 1000;
         total += jumlah * harga;
         totalOrder += jumlah;
       });
@@ -172,19 +169,18 @@
 
     function kirimWhatsApp() {
       const tanggal = document.getElementById("tanggal").value;
-      const seller = document.getElementById("seller").value;
       const produkList = ["jumbo", "lite", "big", "mini", "spj", "circle"];
 
-      let pesan = `📆 Tanggal: ${tanggal}\n👤 Seller: ${seller}\n📦 Penjualan:`;
+      let pesan = `📆 Tanggal: ${tanggal}\n📦 Penjualan:`;
       let total = 0;
       let totalOrder = 0;
 
       produkList.forEach(p => {
         const jumlah = parseInt(document.getElementById(p).value) || 0;
-        const harga = parseInt(document.getElementById(`harga-${p}`).value) || 0;
+        const harga = (parseInt(document.getElementById(`harga-${p}`).value) || 0) * 1000;
         if (jumlah > 0) {
           const subtotal = jumlah * harga;
-          pesan += `\n- ${p.toUpperCase()}: ${jumlah} x ${harga} = Rp ${subtotal.toLocaleString("id-ID")}`;
+          pesan += `\n- ${p.toUpperCase()}: ${jumlah} x ${harga.toLocaleString("id-ID")} = Rp ${subtotal.toLocaleString("id-ID")}`;
           total += subtotal;
           totalOrder += jumlah;
         }
