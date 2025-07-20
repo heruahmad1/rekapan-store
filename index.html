@@ -39,8 +39,14 @@
       font-size: 1.2em;
     }
     #total {
-      font-size: 1.4em;
+      font-size: 1.6em;
       color: #007BFF;
+    }
+    #total-order {
+      font-size: 1.2em;
+    }
+    tfoot tr:first-child td {
+      background-color: #e8f0fe;
     }
   </style>
 </head>
@@ -48,6 +54,10 @@
   <div class="container">
     <h1>Rekapan HR STORE</h1>
     <form id="sales-form">
+      <label>
+        Tanggal:
+        <input type="date" id="tanggal">
+      </label>
       <label>
         Nama Seller:
         <input type="text" id="seller" placeholder="Misal: Andi">
@@ -57,9 +67,9 @@
         <thead>
           <tr>
             <th>Produk</th>
-            <th>Jumlah</th>
+            <th style="width: 20%;">Jumlah</th>
             <th>Harga</th>
-            <th>Subtotal</th>
+            <th style="width: 30%;">Subtotal</th>
           </tr>
         </thead>
         <tbody id="produk-body">
@@ -88,7 +98,7 @@
             <td id="subtotal-mini">Rp 0</td>
           </tr>
           <tr>
-            <td>SPR J</td>
+            <td>SPJ</td>
             <td><input type="number" id="spj" oninput="hitungSubtotal('spj')"></td>
             <td><input type="number" id="harga-spj" oninput="hitungSubtotal('spj')"></td>
             <td id="subtotal-spj">Rp 0</td>
@@ -139,6 +149,7 @@
   </script>
 </body>
 </html>
+
 
 
 
