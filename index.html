@@ -3,80 +3,121 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kalkulator Penjualan</title>
+  <title>Rekapan Penjualan Sederhana</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1em;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    input[type="number"] {
+      width: 80px;
+    }
+    .total-row td {
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <h1>Rekapan Penjualan</h1>
     <form id="sales-form">
       <label>
-        Tanggal
+        Tanggal:
         <input type="date" id="tanggal">
       </label>
       <label>
-        Nama Seller
+        Nama Seller:
         <input type="text" id="seller" placeholder="Misal: Andi">
       </label>
 
-      <h3>Input Jumlah & Harga</h3>
-
-      <label>
-        JUMBO
-        <input type="number" id="jumbo" placeholder="Jumlah">
-        <input type="number" id="harga-jumbo" placeholder="Harga per JUMBO">
-      </label>
-
-      <label>
-        LITE
-        <input type="number" id="lite" placeholder="Jumlah">
-        <input type="number" id="harga-lite" placeholder="Harga per LITE">
-      </label>
-
-      <label>
-        BIG
-        <input type="number" id="big" placeholder="Jumlah">
-        <input type="number" id="harga-big" placeholder="Harga per BIG">
-      </label>
-
-      <label>
-        MINI
-        <input type="number" id="mini" placeholder="Jumlah">
-        <input type="number" id="harga-mini" placeholder="Harga per MINI">
-      </label>
-
-      <label>
-        SPJ
-        <input type="number" id="spj" placeholder="Jumlah">
-        <input type="number" id="harga-spj" placeholder="Harga per SPJ">
-      </label>
-
-      <label>
-        CIRCLE
-        <input type="number" id="circle" placeholder="Jumlah">
-        <input type="number" id="harga-circle" placeholder="Harga per CIRCLE">
-      </label>
-
-      <button type="button" onclick="hitungTotal()">Hitung Total</button>
-      <div id="total">Total: Rp 0</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Produk</th>
+            <th>Jumlah</th>
+            <th>Harga</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody id="produk-body">
+          <tr>
+            <td>JUMBO</td>
+            <td><input type="number" id="jumbo" oninput="hitungSubtotal('jumbo')"></td>
+            <td><input type="number" id="harga-jumbo" oninput="hitungSubtotal('jumbo')"></td>
+            <td id="subtotal-jumbo">Rp 0</td>
+          </tr>
+          <tr>
+            <td>LITE</td>
+            <td><input type="number" id="lite" oninput="hitungSubtotal('lite')"></td>
+            <td><input type="number" id="harga-lite" oninput="hitungSubtotal('lite')"></td>
+            <td id="subtotal-lite">Rp 0</td>
+          </tr>
+          <tr>
+            <td>BIG</td>
+            <td><input type="number" id="big" oninput="hitungSubtotal('big')"></td>
+            <td><input type="number" id="harga-big" oninput="hitungSubtotal('big')"></td>
+            <td id="subtotal-big">Rp 0</td>
+          </tr>
+          <tr>
+            <td>MINI</td>
+            <td><input type="number" id="mini" oninput="hitungSubtotal('mini')"></td>
+            <td><input type="number" id="harga-mini" oninput="hitungSubtotal('mini')"></td>
+            <td id="subtotal-mini">Rp 0</td>
+          </tr>
+          <tr>
+            <td>SPJ</td>
+            <td><input type="number" id="spj" oninput="hitungSubtotal('spj')"></td>
+            <td><input type="number" id="harga-spj" oninput="hitungSubtotal('spj')"></td>
+            <td id="subtotal-spj">Rp 0</td>
+          </tr>
+          <tr>
+            <td>CIRCLE</td>
+            <td><input type="number" id="circle" oninput="hitungSubtotal('circle')"></td>
+            <td><input type="number" id="harga-circle" oninput="hitungSubtotal('circle')"></td>
+            <td id="subtotal-circle">Rp 0</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr class="total-row">
+            <td colspan="3">Total</td>
+            <td id="total">Rp 0</td>
+          </tr>
+        </tfoot>
+      </table>
     </form>
   </div>
 
   <script>
+    function hitungSubtotal(produk) {
+      const jumlah = parseInt(document.getElementById(produk).value) || 0;
+      const harga = parseInt(document.getElementById(`harga-${produk}`).value) || 0;
+      const subtotal = jumlah * harga;
+      document.getElementById(`subtotal-${produk}`).textContent = `Rp ${subtotal.toLocaleString("id-ID")}`;
+      hitungTotal();
+    }
+
     function hitungTotal() {
-      const getVal = id => parseInt(document.getElementById(id).value) || 0;
-
-      let total =
-        getVal("jumbo") * getVal("harga-jumbo") +
-        getVal("lite") * getVal("harga-lite") +
-        getVal("big") * getVal("harga-big") +
-        getVal("mini") * getVal("harga-mini") +
-        getVal("spj") * getVal("harga-spj") +
-        getVal("circle") * getVal("harga-circle");
-
-      document.getElementById("total").textContent = `Total: Rp ${total.toLocaleString("id-ID")}`;
+      const produkList = ["jumbo", "lite", "big", "mini", "spj", "circle"];
+      let total = 0;
+      produkList.forEach(p => {
+        const jumlah = parseInt(document.getElementById(p).value) || 0;
+        const harga = parseInt(document.getElementById(`harga-${p}`).value) || 0;
+        total += jumlah * harga;
+      });
+      document.getElementById("total").textContent = `Rp ${total.toLocaleString("id-ID")}`;
     }
   </script>
 </body>
 </html>
+
 
