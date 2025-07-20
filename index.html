@@ -47,6 +47,17 @@
     tfoot tr:first-child td {
       background-color: #e8f0fe;
     }
+    th:nth-child(2), td:nth-child(2) {
+      width: 12%; /* Lebih kecil */
+    }
+    th:nth-child(4), td:nth-child(4) {
+      width: 35%; /* Lebih besar untuk Subtotal */
+    }
+    #total, #total-order {
+      font-size: 1em;
+      font-weight: bold;
+      color: #007BFF;
+    }
   </style>
 </head>
 <body>
@@ -66,9 +77,9 @@
         <thead>
           <tr>
             <th>Produk</th>
-            <th style="width: 15%;">Jumlah</th>
+            <th>Jumlah</th>
             <th>Harga</th>
-            <th style="width: 35%;">Subtotal</th>
+            <th>Subtotal</th>
           </tr>
         </thead>
         <tbody id="produk-body">
@@ -148,6 +159,7 @@
   </script>
 </body>
 </html>
+
 
 
 
