@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator Penjualan</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Kalkulator Penjualan</h1>
+    <form id="rekapForm">
+      <label>Tanggal:<input type="date" name="tanggal" required></label>
+      <label>Nama Seller:<input type="text" name="seller" required></label>
+      <label>JUMBO:<input type="number" name="jumbo" min="0" value="0"></label>
+      <label>LITE:<input type="number" name="lite" min="0" value="0"></label>
+      <label>BIG:<input type="number" name="big" min="0" value="0"></label>
+      <label>MINI:<input type="number" name="mini" min="0" value="0"></label>
+      <label>SPJ:<input type="number" name="spj" min="0" value="0"></label>
+      <label>CIRCLE:<input type="number" name="circle" min="0" value="0"></label>
+      <label>Harga per Produk:<input type="number" name="harga" min="0" value="0"></label>
+      <p><strong>Total: <span id="total">Rp 0</span></strong></p>
+      <button type="reset">Reset</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById("rekapForm");
+    const totalDisplay = document.getElementById("total");
+
+    form.addEventListener("input", () => {
+      const jumbo = +form.jumbo.value || 0;
+      const lite = +form.lite.value || 0;
+      const big = +form.big.value || 0;
+      const mini = +form.mini.value || 0;
+      const spj = +form.spj.value || 0;
+      const circle = +form.circle.value || 0;
+      const harga = +form.harga.value || 0;
+
+      const totalQty = jumbo + lite + big + mini + spj + circle;
+      const totalHarga = totalQty * harga;
+      totalDisplay.textContent = `Rp ${totalHarga.toLocaleString("id-ID")}`;
+    });
+
+    form.addEventListener("reset", () => {
+      setTimeout(() => {
+        totalDisplay.textContent = "Rp 0";
+      }, 100);
+    });
+  </script>
+</body>
+</html>
