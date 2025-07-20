@@ -8,45 +8,75 @@
 </head>
 <body>
   <div class="container">
-    <h1>Kalkulator Penjualan</h1>
-    <form id="rekapForm">
-      <label>Tanggal:<input type="date" name="tanggal" required></label>
-      <label>Nama Seller:<input type="text" name="seller" required></label>
-      <label>JUMBO:<input type="number" name="jumbo" min="0" value="0"></label>
-      <label>LITE:<input type="number" name="lite" min="0" value="0"></label>
-      <label>BIG:<input type="number" name="big" min="0" value="0"></label>
-      <label>MINI:<input type="number" name="mini" min="0" value="0"></label>
-      <label>SPJ:<input type="number" name="spj" min="0" value="0"></label>
-      <label>CIRCLE:<input type="number" name="circle" min="0" value="0"></label>
-      <label>Harga per Produk:<input type="number" name="harga" min="0" value="0"></label>
-      <p><strong>Total: <span id="total">Rp 0</span></strong></p>
-      <button type="reset">Reset</button>
+    <h1>Rekapan Penjualan</h1>
+    <form id="sales-form">
+      <label>
+        Tanggal
+        <input type="date" id="tanggal">
+      </label>
+      <label>
+        Nama Seller
+        <input type="text" id="seller" placeholder="Misal: Andi">
+      </label>
+
+      <h3>Input Jumlah & Harga</h3>
+
+      <label>
+        JUMBO
+        <input type="number" id="jumbo" placeholder="Jumlah">
+        <input type="number" id="harga-jumbo" placeholder="Harga per JUMBO">
+      </label>
+
+      <label>
+        LITE
+        <input type="number" id="lite" placeholder="Jumlah">
+        <input type="number" id="harga-lite" placeholder="Harga per LITE">
+      </label>
+
+      <label>
+        BIG
+        <input type="number" id="big" placeholder="Jumlah">
+        <input type="number" id="harga-big" placeholder="Harga per BIG">
+      </label>
+
+      <label>
+        MINI
+        <input type="number" id="mini" placeholder="Jumlah">
+        <input type="number" id="harga-mini" placeholder="Harga per MINI">
+      </label>
+
+      <label>
+        SPJ
+        <input type="number" id="spj" placeholder="Jumlah">
+        <input type="number" id="harga-spj" placeholder="Harga per SPJ">
+      </label>
+
+      <label>
+        CIRCLE
+        <input type="number" id="circle" placeholder="Jumlah">
+        <input type="number" id="harga-circle" placeholder="Harga per CIRCLE">
+      </label>
+
+      <button type="button" onclick="hitungTotal()">Hitung Total</button>
+      <div id="total">Total: Rp 0</div>
     </form>
   </div>
 
   <script>
-    const form = document.getElementById("rekapForm");
-    const totalDisplay = document.getElementById("total");
+    function hitungTotal() {
+      const getVal = id => parseInt(document.getElementById(id).value) || 0;
 
-    form.addEventListener("input", () => {
-      const jumbo = +form.jumbo.value || 0;
-      const lite = +form.lite.value || 0;
-      const big = +form.big.value || 0;
-      const mini = +form.mini.value || 0;
-      const spj = +form.spj.value || 0;
-      const circle = +form.circle.value || 0;
-      const harga = +form.harga.value || 0;
+      let total =
+        getVal("jumbo") * getVal("harga-jumbo") +
+        getVal("lite") * getVal("harga-lite") +
+        getVal("big") * getVal("harga-big") +
+        getVal("mini") * getVal("harga-mini") +
+        getVal("spj") * getVal("harga-spj") +
+        getVal("circle") * getVal("harga-circle");
 
-      const totalQty = jumbo + lite + big + mini + spj + circle;
-      const totalHarga = totalQty * harga;
-      totalDisplay.textContent = `Rp ${totalHarga.toLocaleString("id-ID")}`;
-    });
-
-    form.addEventListener("reset", () => {
-      setTimeout(() => {
-        totalDisplay.textContent = "Rp 0";
-      }, 100);
-    });
+      document.getElementById("total").textContent = `Total: Rp ${total.toLocaleString("id-ID")}`;
+    }
   </script>
 </body>
 </html>
+
