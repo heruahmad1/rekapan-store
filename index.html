@@ -48,22 +48,33 @@
       background-color: #e8f0fe;
     }
     th:nth-child(2), td:nth-child(2) {
-      width: 10%; /* Kolom Jumlah diperkecil */
+      width: 10%;
     }
     th:nth-child(4), td:nth-child(4) {
-      width: 30%; /* Kolom Subtotal diperbesar */
+      width: 35%; /* Kolom Subtotal diperbesar */
     }
     th:nth-child(3), td:nth-child(3) {
-      width: 20%; /* Kolom Harga proporsional */
+      width: 20%;
     }
     th:nth-child(1), td:nth-child(1) {
-      width: 20%; /* Kolom Produk */
+      width: 15%;
+    }
+    .whatsapp-button {
+      display: inline-block;
+      background-color: #25D366;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 1em;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Rekapan HR STORE</h1>
+    <h1>Rekapan Penjualan</h1>
     <form id="sales-form">
       <label>
         Tanggal:
@@ -132,6 +143,7 @@
           </tr>
         </tfoot>
       </table>
+      <a href="#" class="whatsapp-button" onclick="kirimWhatsApp()">Kirim ke WhatsApp</a>
     </form>
   </div>
 
@@ -157,9 +169,37 @@
       document.getElementById("total").textContent = `Rp ${total.toLocaleString("id-ID")}`;
       document.getElementById("total-order").textContent = totalOrder;
     }
+
+    function kirimWhatsApp() {
+      const tanggal = document.getElementById("tanggal").value;
+      const seller = document.getElementById("seller").value;
+      const produkList = ["jumbo", "lite", "big", "mini", "spj", "circle"];
+
+      let pesan = `📆 Tanggal: ${tanggal}\n👤 Seller: ${seller}\n📦 Penjualan:`;
+      let total = 0;
+      let totalOrder = 0;
+
+      produkList.forEach(p => {
+        const jumlah = parseInt(document.getElementById(p).value) || 0;
+        const harga = parseInt(document.getElementById(`harga-${p}`).value) || 0;
+        if (jumlah > 0) {
+          const subtotal = jumlah * harga;
+          pesan += `\n- ${p.toUpperCase()}: ${jumlah} x ${harga} = Rp ${subtotal.toLocaleString("id-ID")}`;
+          total += subtotal;
+          totalOrder += jumlah;
+        }
+      });
+
+      pesan += `\n💰 Total: Rp ${total.toLocaleString("id-ID")}\n🧾 Total Order: ${totalOrder}`;
+
+      const encodedMessage = encodeURIComponent(pesan);
+      const whatsappURL = `https://wa.me/?text=${encodedMessage}`;
+      window.open(whatsappURL, '_blank');
+    }
   </script>
 </body>
 </html>
+
 
 
 
