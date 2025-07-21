@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rekapan Penjualan Sederhana</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
   <style>
     table {
       width: 100%;
@@ -24,6 +26,25 @@
     .total-row td {
       font-weight: bold;
     }
+    #total, #total-order {
+      font-size: 1em;
+      color: #007BFF;
+    }
+    tfoot tr:first-child td {
+      background-color: #e8f0fe;
+    }
+    th:nth-child(2), td:nth-child(2) {
+      width: 10%;
+    }
+    th:nth-child(4), td:nth-child(4) {
+      width: 35%;
+    }
+    th:nth-child(3), td:nth-child(3) {
+      width: 25%;
+    }
+    th:nth-child(1), td:nth-child(1) {
+      width: 15%;
+    }
     .whatsapp-button {
       display: inline-block;
       background-color: #25D366;
@@ -33,11 +54,6 @@
       border-radius: 5px;
       text-decoration: none;
       font-size: 1em;
-      margin-top: 10px;
-    }
-    #qris-img {
-      max-width: 300px;
-      display: none;
       margin-top: 10px;
     }
   </style>
@@ -50,21 +66,8 @@
         Tanggal:
         <input type="date" id="tanggal">
       </label>
-      <br>
-      <label>
-        Metode Pembayaran:
-        <select id="metode-pembayaran" onchange="tampilkanMetode()">
-          <option value="">-- Pilih --</option>
-          <option value="Transfer SEABANK">Transfer SEABANK</option>
-          <option value="DANA">DANA</option>
-          <option value="QRIS">QRIS</option>
-          <option value="Tunai">Tunai</option>
-        </select>
-      </label>
-      <div id="info-pembayaran"></div>
-      <img id="qris-img" src="3d8392a4-e896-48f4-8a37-a8d63db4591e.jpg" alt="QRIS">
 
-      <br><a href="#" class="whatsapp-button" onclick="kirimWhatsApp()">Kirim ke WhatsApp</a>
+      <a href="#" class="whatsapp-button" onclick="kirimWhatsApp()">Kirim ke WhatsApp</a>
 
       <table>
         <thead>
@@ -100,6 +103,24 @@
             <td><input type="number" id="harga-mini" oninput="hitungSubtotal('mini')"></td>
             <td id="subtotal-mini">Rp 0</td>
           </tr>
+          <tr>
+            <td><input type="text" id="custom1-name" placeholder="Produk Lain 1"></td>
+            <td><input type="number" id="custom1" oninput="hitungSubtotal('custom1')"></td>
+            <td><input type="number" id="harga-custom1" oninput="hitungSubtotal('custom1')"></td>
+            <td id="subtotal-custom1">Rp 0</td>
+          </tr>
+          <tr>
+            <td><input type="text" id="custom2-name" placeholder="Produk Lain 2"></td>
+            <td><input type="number" id="custom2" oninput="hitungSubtotal('custom2')"></td>
+            <td><input type="number" id="harga-custom2" oninput="hitungSubtotal('custom2')"></td>
+            <td id="subtotal-custom2">Rp 0</td>
+          </tr>
+          <tr>
+            <td><input type="text" id="custom3-name" placeholder="Produk Lain 3"></td>
+            <td><input type="number" id="custom3" oninput="hitungSubtotal('custom3')"></td>
+            <td><input type="number" id="harga-custom3" oninput="hitungSubtotal('custom3')"></td>
+            <td id="subtotal-custom3">Rp 0</td>
+          </tr>
         </tbody>
         <tfoot>
           <tr class="total-row">
@@ -125,7 +146,7 @@
     }
 
     function hitungTotal() {
-      const produkList = ["jumbo", "lite", "big", "mini"];
+      const produkList = ["jumbo", "lite", "big", "mini", "custom1", "custom2", "custom3"];
       let total = 0;
       let totalOrder = 0;
 
@@ -140,43 +161,17 @@
       document.getElementById("total-order").textContent = totalOrder;
     }
 
-    function tampilkanMetode() {
-      const metode = document.getElementById("metode-pembayaran").value;
-      const info = document.getElementById("info-pembayaran");
-      const qrisImg = document.getElementById("qris-img");
-      let html = "";
-
-      if (metode === "Transfer SEABANK") {
-        html = "<b>SEABANK:</b> 901516847602<br><b>AN:</b> AHMAD KHAIRUDIN";
-        qrisImg.style.display = "none";
-      } else if (metode === "DANA") {
-        html = "<b>DANA:</b> 082236625627<br><b>AN:</b> AHMAD KHAIRUDIN";
-        qrisImg.style.display = "none";
-      } else if (metode === "QRIS") {
-        html = "<b>QRIS atas nama:</b> AHMAD KHAIRUDIN";
-        qrisImg.style.display = "block";
-      } else {
-        html = "";
-        qrisImg.style.display = "none";
-      }
-
-      info.innerHTML = html;
-    }
-
     function kirimWhatsApp() {
-      const metodePembayaran = document.getElementById("metode-pembayaran").value;
-      if (!metodePembayaran) {
-        alert("Silakan pilih metode pembayaran terlebih dahulu.");
-        return;
-      }
-
       const tanggal = document.getElementById("tanggal").value;
-      const produkList = ["jumbo", "lite", "big", "mini"];
+      const produkList = ["jumbo", "lite", "big", "mini", "custom1", "custom2", "custom3"];
       const produkNames = {
         jumbo: "JUMBO",
         lite: "LITE",
         big: "BIG",
-        mini: "MINI"
+        mini: "MINI",
+        custom1: document.getElementById("custom1-name").value || "Lain 1",
+        custom2: document.getElementById("custom2-name").value || "Lain 2",
+        custom3: document.getElementById("custom3-name").value || "Lain 3"
       };
 
       let pesan = `📆 Tanggal: ${tanggal}\n📦 Penjualan:`;
@@ -194,30 +189,8 @@
         }
       });
 
-      pesan += `\n💰 Total: Rp ${total.toLocaleString("id-ID")}\n📟 Total Order: ${totalOrder}`;
-      if (metodePembayaran === 'Transfer SEABANK') {
-        pesan += `
-Metode Pembayaran: Transfer SEABANK
-SEABANK : 901516847602
-DANA : 082236625627
-AN : AHMAD KHAIRUDIN`;
-      } else if (metodePembayaran === 'DANA') {
-        pesan += `
-Metode Pembayaran: DANA
-SEABANK : 901516847602
-DANA : 082236625627
-AN : AHMAD KHAIRUDIN`;
-      } else if (metodePembayaran === 'QRIS') {
-        pesan += `
-Metode Pembayaran: QRIS
-SEABANK : 901516847602
-DANA : 082236625627
-AN : AHMAD KHAIRUDIN
-qris`;
-      } else {
-        pesan += `
-Metode Pembayaran: ${metodePembayaran}`;
-      }
+      pesan += `\n💰 Total: Rp ${total.toLocaleString("id-ID")}\n🧾 Total Order: ${totalOrder}`;
+      pesan += `\nMetode Pembayaran: QRIS\nSEABANK : 901516847602\nDANA : 082236625627\nAN : AHMAD KHAIRUDIN\nhttps://aspi-qris.id (scan QR pada gambar di atas)`;
 
       const encodedMessage = encodeURIComponent(pesan);
       const whatsappURL = `https://wa.me/?text=${encodedMessage}`;
