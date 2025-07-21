@@ -7,54 +7,79 @@
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
   <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      background: #fff;
+      padding: 30px;
+      max-width: 900px;
+      margin: auto;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    form label {
+      display: block;
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+    input[type="date"] {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
     table {
       width: 100%;
       border-collapse: collapse;
+      margin-top: 20px;
       margin-bottom: 1em;
     }
     th, td {
-      border: 1px solid #ccc;
-      padding: 8px;
+      border: 1px solid #ddd;
+      padding: 10px;
       text-align: center;
     }
     th {
-      background-color: #f0f0f0;
+      background-color: #007BFF;
+      color: white;
     }
     input[type="number"], input[type="text"] {
-      width: 70px;
+      width: 90%;
+      padding: 6px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
     }
     .total-row td {
       font-weight: bold;
+      background: #f2faff;
     }
     #total, #total-order {
-      font-size: 1em;
+      font-size: 1.1em;
       color: #007BFF;
     }
-    tfoot tr:first-child td {
-      background-color: #e8f0fe;
-    }
-    th:nth-child(2), td:nth-child(2) {
-      width: 10%;
-    }
-    th:nth-child(4), td:nth-child(4) {
-      width: 35%;
-    }
-    th:nth-child(3), td:nth-child(3) {
-      width: 25%;
-    }
-    th:nth-child(1), td:nth-child(1) {
-      width: 15%;
-    }
     .whatsapp-button {
-      display: inline-block;
+      display: block;
+      width: fit-content;
       background-color: #25D366;
       color: white;
-      padding: 10px 20px;
+      padding: 12px 24px;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       text-decoration: none;
-      font-size: 1em;
-      margin-top: 10px;
+      font-size: 1rem;
+      margin: 20px auto 0 auto;
+      transition: background-color 0.3s ease;
+    }
+    .whatsapp-button:hover {
+      background-color: #1ebe5b;
     }
   </style>
 </head>
@@ -174,7 +199,7 @@
         custom3: document.getElementById("custom3-name").value || "Lain 3"
       };
 
-      let pesan = `📆 Tanggal: ${tanggal}\n📦 REKAPAN ORDER HR STORE:`;
+      let pesan = `📆 Tanggal: ${tanggal}\n📦 Penjualan:`;
       let total = 0;
       let totalOrder = 0;
 
@@ -189,13 +214,8 @@
         }
       });
 
-      pesan += `\n💰 Total: *Rp ${total.toLocaleString("id-ID")}*\n🧾 Total Order: ${totalOrder}`;
-      pesan += `
-💳 PAYMENT 
-SEABANK : 901516847602
-DANA : 082236625627
-A.N : AHMAD KHAIRUDIN
-QRIS DI SINI 👉 rebrand.ly/QRIS-HR`;
+      pesan += `\n💰 Total: Rp ${total.toLocaleString("id-ID")}\n🧾 Total Order: ${totalOrder}`;
+      pesan += `\nMetode Pembayaran:\nSEABANK : 901516847602\nDANA : 082236625627\nAN : AHMAD KHAIRUDIN\nQRIS: https://cdn.jsdelivr.net/gh/heruahmad1/rekapan-store/Gambar.jpg (klik untuk lihat QRIS)`;
 
       const encodedMessage = encodeURIComponent(pesan);
       const whatsappURL = `https://wa.me/?text=${encodedMessage}`;
