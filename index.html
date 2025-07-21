@@ -164,6 +164,12 @@
     }
 
     function kirimWhatsApp() {
+      const metodePembayaran = document.getElementById("metode-pembayaran").value;
+      if (!metodePembayaran) {
+        alert("Silakan pilih metode pembayaran terlebih dahulu.");
+        return;
+      }
+
       const tanggal = document.getElementById("tanggal").value;
       const produkList = ["jumbo", "lite", "big", "mini"];
       const produkNames = {
@@ -189,11 +195,7 @@
       });
 
       pesan += `\n💰 Total: Rp ${total.toLocaleString("id-ID")}\n📟 Total Order: ${totalOrder}`;
-
-      const metodePembayaran = document.getElementById("metode-pembayaran").value;
-      if (metodePembayaran) {
-        pesan += `\n💳 Metode Pembayaran: ${metodePembayaran}`;
-      }
+      pesan += `\n💳 Metode Pembayaran: ${metodePembayaran}`;
 
       const encodedMessage = encodeURIComponent(pesan);
       const whatsappURL = `https://wa.me/?text=${encodedMessage}`;
@@ -202,8 +204,6 @@
   </script>
 </body>
 </html>
-
-
 
 
 
