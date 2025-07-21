@@ -4,82 +4,106 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rekapan Penjualan Sederhana</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="manifest" href="manifest.json">
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f9f9f9;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f3f4f6;
       margin: 0;
-      padding: 20px;
+      padding: 16px;
     }
     .container {
-      background: #fff;
-      padding: 30px;
-      max-width: 900px;
+      background: #ffffff;
+      padding: 16px;
+      max-width: 600px;
       margin: auto;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
     h1 {
+      font-size: 1.4rem;
       text-align: center;
-      color: #333;
-      margin-bottom: 20px;
+      color: #111827;
+      margin-bottom: 1rem;
     }
     form label {
       display: block;
-      margin-bottom: 15px;
-      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      color: #374151;
+      font-weight: 500;
     }
     input[type="date"] {
-      padding: 8px;
-      border: 1px solid #ccc;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d1d5db;
       border-radius: 6px;
+      font-size: 1rem;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
-      margin-bottom: 1em;
+      margin-top: 1rem;
+      font-size: 0.95rem;
     }
     th, td {
-      border: 1px solid #ddd;
-      padding: 10px;
+      border: 1px solid #e5e7eb;
+      padding: 8px;
       text-align: center;
     }
     th {
-      background-color: #007BFF;
+      background-color: #3b82f6;
       color: white;
     }
     input[type="number"], input[type="text"] {
-      width: 90%;
+      width: 100%;
       padding: 6px;
       border-radius: 5px;
-      border: 1px solid #ccc;
+      border: 1px solid #d1d5db;
+      font-size: 0.95rem;
     }
     .total-row td {
       font-weight: bold;
-      background: #f2faff;
+      background: #eff6ff;
     }
     #total, #total-order {
-      font-size: 1.1em;
-      color: #007BFF;
+      font-size: 1.05rem;
+      color: #2563eb;
     }
     .whatsapp-button {
       display: block;
-      width: fit-content;
+      width: 100%;
+      text-align: center;
       background-color: #25D366;
       color: white;
-      padding: 12px 24px;
+      padding: 12px;
       border: none;
-      border-radius: 8px;
+      border-radius: 6px;
       text-decoration: none;
       font-size: 1rem;
-      margin: 20px auto 0 auto;
-      transition: background-color 0.3s ease;
+      margin-top: 16px;
     }
     .whatsapp-button:hover {
       background-color: #1ebe5b;
+    }
+    @media (max-width: 480px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+        width: 100%;
+      }
+      thead {
+        display: none;
+      }
+      td {
+        text-align: left;
+        padding-left: 50%;
+        position: relative;
+      }
+      td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        font-weight: bold;
+        color: #6b7280;
+      }
     }
   </style>
 </head>
@@ -105,46 +129,46 @@
         </thead>
         <tbody id="produk-body">
           <tr>
-            <td>JUMBO</td>
-            <td><input type="number" id="jumbo" oninput="hitungSubtotal('jumbo')"></td>
-            <td><input type="number" id="harga-jumbo" oninput="hitungSubtotal('jumbo')"></td>
-            <td id="subtotal-jumbo">Rp 0</td>
+            <td data-label="Produk">🍱 JUMBO</td>
+            <td data-label="Jumlah"><input type="number" id="jumbo" oninput="hitungSubtotal('jumbo')"></td>
+            <td data-label="Harga"><input type="number" id="harga-jumbo" oninput="hitungSubtotal('jumbo')"></td>
+            <td data-label="Subtotal" id="subtotal-jumbo">Rp 0</td>
           </tr>
           <tr>
-            <td>LITE</td>
-            <td><input type="number" id="lite" oninput="hitungSubtotal('lite')"></td>
-            <td><input type="number" id="harga-lite" oninput="hitungSubtotal('lite')"></td>
-            <td id="subtotal-lite">Rp 0</td>
+            <td data-label="Produk">🍱 LITE</td>
+            <td data-label="Jumlah"><input type="number" id="lite" oninput="hitungSubtotal('lite')"></td>
+            <td data-label="Harga"><input type="number" id="harga-lite" oninput="hitungSubtotal('lite')"></td>
+            <td data-label="Subtotal" id="subtotal-lite">Rp 0</td>
           </tr>
           <tr>
-            <td>BIG</td>
-            <td><input type="number" id="big" oninput="hitungSubtotal('big')"></td>
-            <td><input type="number" id="harga-big" oninput="hitungSubtotal('big')"></td>
-            <td id="subtotal-big">Rp 0</td>
+            <td data-label="Produk">🍱 BIG</td>
+            <td data-label="Jumlah"><input type="number" id="big" oninput="hitungSubtotal('big')"></td>
+            <td data-label="Harga"><input type="number" id="harga-big" oninput="hitungSubtotal('big')"></td>
+            <td data-label="Subtotal" id="subtotal-big">Rp 0</td>
           </tr>
           <tr>
-            <td>MINI</td>
-            <td><input type="number" id="mini" oninput="hitungSubtotal('mini')"></td>
-            <td><input type="number" id="harga-mini" oninput="hitungSubtotal('mini')"></td>
-            <td id="subtotal-mini">Rp 0</td>
+            <td data-label="Produk">🍱 MINI</td>
+            <td data-label="Jumlah"><input type="number" id="mini" oninput="hitungSubtotal('mini')"></td>
+            <td data-label="Harga"><input type="number" id="harga-mini" oninput="hitungSubtotal('mini')"></td>
+            <td data-label="Subtotal" id="subtotal-mini">Rp 0</td>
           </tr>
           <tr>
-            <td><input type="text" id="custom1-name" placeholder="Produk Lain 1"></td>
-            <td><input type="number" id="custom1" oninput="hitungSubtotal('custom1')"></td>
-            <td><input type="number" id="harga-custom1" oninput="hitungSubtotal('custom1')"></td>
-            <td id="subtotal-custom1">Rp 0</td>
+            <td data-label="Produk"><input type="text" id="custom1-name" placeholder="Produk Lain 1"></td>
+            <td data-label="Jumlah"><input type="number" id="custom1" oninput="hitungSubtotal('custom1')"></td>
+            <td data-label="Harga"><input type="number" id="harga-custom1" oninput="hitungSubtotal('custom1')"></td>
+            <td data-label="Subtotal" id="subtotal-custom1">Rp 0</td>
           </tr>
           <tr>
-            <td><input type="text" id="custom2-name" placeholder="Produk Lain 2"></td>
-            <td><input type="number" id="custom2" oninput="hitungSubtotal('custom2')"></td>
-            <td><input type="number" id="harga-custom2" oninput="hitungSubtotal('custom2')"></td>
-            <td id="subtotal-custom2">Rp 0</td>
+            <td data-label="Produk"><input type="text" id="custom2-name" placeholder="Produk Lain 2"></td>
+            <td data-label="Jumlah"><input type="number" id="custom2" oninput="hitungSubtotal('custom2')"></td>
+            <td data-label="Harga"><input type="number" id="harga-custom2" oninput="hitungSubtotal('custom2')"></td>
+            <td data-label="Subtotal" id="subtotal-custom2">Rp 0</td>
           </tr>
           <tr>
-            <td><input type="text" id="custom3-name" placeholder="Produk Lain 3"></td>
-            <td><input type="number" id="custom3" oninput="hitungSubtotal('custom3')"></td>
-            <td><input type="number" id="harga-custom3" oninput="hitungSubtotal('custom3')"></td>
-            <td id="subtotal-custom3">Rp 0</td>
+            <td data-label="Produk"><input type="text" id="custom3-name" placeholder="Produk Lain 3"></td>
+            <td data-label="Jumlah"><input type="number" id="custom3" oninput="hitungSubtotal('custom3')"></td>
+            <td data-label="Harga"><input type="number" id="harga-custom3" oninput="hitungSubtotal('custom3')"></td>
+            <td data-label="Subtotal" id="subtotal-custom3">Rp 0</td>
           </tr>
         </tbody>
         <tfoot>
@@ -159,69 +183,16 @@
         </tfoot>
       </table>
     </form>
+    <div style="margin-top: 24px; font-size: 0.95rem; color: #374151; line-height: 1.6;">
+      <strong>💳 PAYMENT</strong><br>
+      SEABANK: <strong>901516847602</strong><br>
+      DANA: <strong>082236625627</strong><br>
+      A.N: <strong>AHMAD KHAIRUDIN</strong><br>
+      QRIS KLIK DISINI 👉 rebrand.ly/QRIS-HR</a>
+    </div>
   </div>
-
-  <script>
-    function hitungSubtotal(produk) {
-      const jumlah = parseInt(document.getElementById(produk).value) || 0;
-      const harga = (parseInt(document.getElementById(`harga-${produk}`).value) || 0) * 1000;
-      const subtotal = jumlah * harga;
-      document.getElementById(`subtotal-${produk}`).textContent = `Rp ${subtotal.toLocaleString("id-ID")}`;
-      hitungTotal();
-    }
-
-    function hitungTotal() {
-      const produkList = ["jumbo", "lite", "big", "mini", "custom1", "custom2", "custom3"];
-      let total = 0;
-      let totalOrder = 0;
-
-      produkList.forEach(p => {
-        const jumlah = parseInt(document.getElementById(p).value) || 0;
-        const harga = (parseInt(document.getElementById(`harga-${p}`).value) || 0) * 1000;
-        total += jumlah * harga;
-        totalOrder += jumlah;
-      });
-
-      document.getElementById("total").textContent = `Rp ${total.toLocaleString("id-ID")}`;
-      document.getElementById("total-order").textContent = totalOrder;
-    }
-
-    function kirimWhatsApp() {
-      const tanggal = document.getElementById("tanggal").value;
-      const produkList = ["jumbo", "lite", "big", "mini", "custom1", "custom2", "custom3"];
-      const produkNames = {
-        jumbo: "JUMBO",
-        lite: "LITE",
-        big: "BIG",
-        mini: "MINI",
-        custom1: document.getElementById("custom1-name").value || "Lain 1",
-        custom2: document.getElementById("custom2-name").value || "Lain 2",
-        custom3: document.getElementById("custom3-name").value || "Lain 3"
-      };
-
-      let pesan = `📆 Tanggal: ${tanggal}\n📦 Penjualan:`;
-      let total = 0;
-      let totalOrder = 0;
-
-      produkList.forEach(p => {
-        const jumlah = parseInt(document.getElementById(p).value) || 0;
-        const harga = (parseInt(document.getElementById(`harga-${p}`).value) || 0) * 1000;
-        if (jumlah > 0) {
-          const subtotal = jumlah * harga;
-          pesan += `\n- ${produkNames[p]}: ${jumlah} x ${harga.toLocaleString("id-ID")} = Rp ${subtotal.toLocaleString("id-ID")}`;
-          total += subtotal;
-          totalOrder += jumlah;
-        }
-      });
-
-      pesan += `\n💰 Total: Rp ${total.toLocaleString("id-ID")}\n🧾 Total Order: ${totalOrder}`;
-      pesan += `\nMetode Pembayaran:\nSEABANK : 901516847602\nDANA : 082236625627\nAN : AHMAD KHAIRUDIN\nQRIS: https://cdn.jsdelivr.net/gh/heruahmad1/rekapan-store/Gambar.jpg (klik untuk lihat QRIS)`;
-
-      const encodedMessage = encodeURIComponent(pesan);
-      const whatsappURL = `https://wa.me/?text=${encodedMessage}`;
-      window.open(whatsappURL, '_blank');
-    }
-  </script>
 </body>
 </html>
+
+
 
