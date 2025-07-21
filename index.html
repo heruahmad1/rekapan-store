@@ -190,7 +190,12 @@
       });
 
       pesan += `\n💰 Total: Rp ${total.toLocaleString("id-ID")}\n🧾 Total Order: ${totalOrder}`;
-      pesan += `\nMetode Pembayaran: QRIS\nSEABANK : 901516847602\nDANA : 082236625627\nAN : AHMAD KHAIRUDIN\nhttps://aspi-qris.id (scan QR pada gambar di atas)`;
+      pesan += `
+Metode Pembayaran:
+SEABANK : 901516847602
+DANA : 082236625627
+AN : AHMAD KHAIRUDIN
+QRIS: https://aspi-qris.id (scan QR pada gambar di atas)`;
 
       const encodedMessage = encodeURIComponent(pesan);
       const whatsappURL = `https://wa.me/?text=${encodedMessage}`;
@@ -199,6 +204,4 @@
   </script>
 </body>
 </html>
-
-
 
