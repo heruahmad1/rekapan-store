@@ -195,7 +195,29 @@
       });
 
       pesan += `\n💰 Total: Rp ${total.toLocaleString("id-ID")}\n📟 Total Order: ${totalOrder}`;
-      pesan += `\n💳 Metode Pembayaran: ${metodePembayaran}`;
+      if (metodePembayaran === 'Transfer SEABANK') {
+        pesan += `
+Metode Pembayaran: Transfer SEABANK
+SEABANK : 901516847602
+DANA : 082236625627
+AN : AHMAD KHAIRUDIN`;
+      } else if (metodePembayaran === 'DANA') {
+        pesan += `
+Metode Pembayaran: DANA
+SEABANK : 901516847602
+DANA : 082236625627
+AN : AHMAD KHAIRUDIN`;
+      } else if (metodePembayaran === 'QRIS') {
+        pesan += `
+Metode Pembayaran: QRIS
+SEABANK : 901516847602
+DANA : 082236625627
+AN : AHMAD KHAIRUDIN
+qris`;
+      } else {
+        pesan += `
+Metode Pembayaran: ${metodePembayaran}`;
+      }
 
       const encodedMessage = encodeURIComponent(pesan);
       const whatsappURL = `https://wa.me/?text=${encodedMessage}`;
@@ -204,10 +226,6 @@
   </script>
 </body>
 </html>
-
-
-
-
 
 
 
