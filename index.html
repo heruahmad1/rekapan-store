@@ -201,7 +201,16 @@ QRIS DI SINI 👉 rebrand.ly/QRIS-HR`;
       const whatsappURL = `https://wa.me/?text=${encodedMessage}`;
       window.open(whatsappURL, '_blank');
     }
-  </script>
+ <script>
+  // Set tanggal otomatis saat halaman dibuka
+  window.addEventListener('DOMContentLoaded', function () {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    document.getElementById('tanggal').value = `${yyyy}-${mm}-${dd}`;
+  });
+</script>
 </body>
 </html>
 
