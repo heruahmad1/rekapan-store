@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator Transaksi</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #d4f4c9;
+      padding: 20px;
+      margin: 0;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      max-width: 500px;
+      margin: auto;
+      background-color: #e5fdd2;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #000;
+      text-align: center;
+      padding: 10px;
+    }
+    input[type="number"] {
+      width: 80px;
+      padding: 5px;
+    }
+    tfoot td {
+      font-weight: bold;
+      background-color: #b2f2a6;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Kalkulator Transaksi</h2>
+
+  
+  <div style="text-align:center; margin-bottom: 20px;">
+    <div id="tanggal" style="font-weight:bold; margin-bottom: 10px;"></div>
+    <button onclick="kirimWhatsApp()" style="padding: 10px 20px; font-size: 16px;">Kirim ke WhatsApp</button>
+  </div>
+
+<table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Jumlah</th>
+        <th>Harga</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody id="productTable">
+      <tr>
+        <td>Super Jumbo</td>
+        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
+        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
+        <td class="total">Rp0</td>
+      </tr>
+      <tr>
+        <td>Jumbo</td>
+        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
+        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
+        <td class="total">Rp0</td>
+      </tr>
+      <tr>
+        <td>Lite</td>
+        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
+        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
+        <td class="total">Rp0</td>
+      </tr>
+      <tr>
+        <td>Big</td>
+        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
+        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
+        <td class="total">Rp0</td>
+      </tr>
+      <tr>
+        <td>Mini</td>
+        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
+        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
+        <td class="total">Rp0</td>
+      </tr>
+    
+      <tr>
+        <td><input type="text" placeholder="Nama Produk" style="width:100%"></td>
+        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
+        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
+        <td class="total">Rp0</td>
+      </tr>
+      <tr>
+        <td><input type="text" placeholder="Nama Produk" style="width:100%"></td>
+        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
+        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
+        <td class="total">Rp0</td>
+      </tr>
+
+</tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3">REFUND / SALDO</td><td><input type="number" min="0" value="" id="refund" onfocus="this.value=''" onchange="hitung()"></td>
+      </tr>
+      <tr>
+        <td colspan="3">JUMLAH TRX</td>
+        <td id="totalTrx">0</td>
+      </tr>
+      <tr>
+        <td colspan="3">TOTAL</td>
+        <td id="grandTotal">Rp0</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <script>
+    function formatRupiah(angka) {
+      return 'Rp' + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    function hitung() {
+      const rows = document.querySelectorAll("#productTable tr");
+      let totalSemua = 0;
+      let jumlahTrx = 0;
+
+      rows.forEach(row => {
+        const qty = parseInt(row.cells[1].querySelector("input").value) || 0;
+        const harga = (parseInt(row.cells[2].querySelector("input").value) || 0) * 1000;
+        const total = qty * harga;
+
+        row.cells[3].innerText = formatRupiah(total);
+
+        jumlahTrx += qty;
+        totalSemua += total;
+      });
+
+      let refund = (parseInt(document.getElementById("refund").value) || 0) * 1000;
+      let totalSetelahRefund = totalSemua - refund;
+      document.getElementById("grandTotal").innerText = formatRupiah(totalSetelahRefund);
+      document.getElementById("totalTrx").innerText = jumlahTrx;
+    }
+
+    window.onload = hitung;
+  
+function kirimWhatsApp() {
+  let pesan = "*Rekap Transaksi*%0A";
+  const rows = document.querySelectorAll("#productTable tr");
+
+  rows.forEach(row => {
+    const nama = row.cells[0].querySelector("input")?.value || row.cells[0].innerText;
+    const qty = row.cells[1].querySelector("input").value || 0;
+    const harga = row.cells[2].querySelector("input").value || 0;
+    const total = row.cells[3].innerText;
+
+    if (qty > 0 && harga > 0) {
+      pesan += `- ${nama}: ${qty} x Rp${(parseInt(harga)*1000).toLocaleString('id-ID')} = ${total}%0A`;
+    }
+  });
+
+  const trx = document.getElementById("totalTrx").innerText;
+  const grand = document.getElementById("grandTotal").innerText;
+  const refund = document.getElementById("refund").value;
+  if (refund) {
+    pesan += `Refund: Rp${(parseInt(refund)*1000).toLocaleString('id-ID')}%0A`;
+  }
+  pesan += `Jumlah Transaksi: ${trx}%0ATotal: ${grand}`;
+
+  const url = "https://wa.me/?text=" + pesan;
+  window.open(url, "_blank");
+}
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  const tgl = new Date();
+  const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+  document.getElementById("tanggal").innerText = "Tanggal: " + tgl.toLocaleDateString('id-ID', options);
+});
+
+</script>
+
+
+  <div style="text-align:center; margin-top: 20px;">
+    <button onclick="kirimWhatsApp()" style="padding: 10px 20px; font-size: 16px;">Kirim ke WhatsApp</button>
+  </div>
+
+</body>
+</html>
