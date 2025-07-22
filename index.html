@@ -105,37 +105,46 @@
       document.getElementById("totalTrx").innerText = jumlahTrx;
     }
 
-    function kirimWhatsApp() {
-      const tgl = new Date();
-      const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-      const tanggal = tgl.toLocaleDateString('id-ID', options);
+    <script>
+function kirimWhatsApp() {
+  const tgl = new Date();
+  const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+  const tanggal = tgl.toLocaleDateString('id-ID', options);
 
-      let pesan = `📆 Tanggal: ${tanggal}%0A📦 *REKAPAN TRANSAKSI*:%0A`;
-      const rows = document.querySelectorAll("#productTable tr");
+  let pesan = `📆 Tanggal: ${tanggal}\n🧾 *REKAPAN TRANSAKSI:*\n`;
+  const rows = document.querySelectorAll("#productTable tr");
 
-      rows.forEach(row => {
-        const nama = row.cells[0].querySelector("input")?.value || row.cells[0].innerText;
-        const jumlah = row.cells[1].querySelector("input").value || 0;
-        const harga = row.cells[2].querySelector("input").value || 0;
-        const total = row.cells[3].innerText;
+  rows.forEach(row => {
+    const nama = row.cells[0].querySelector("input")?.value || row.cells[0].innerText;
+    const jumlah = row.cells[1].querySelector("input").value || 0;
+    const harga = row.cells[2].querySelector("input").value || 0;
+    const total = row.cells[3].innerText;
 
-        if (jumlah > 0 && harga > 0) {
-          pesan += `- ${nama}: ${jumlah} x Rp${(parseInt(harga)*1000).toLocaleString('id-ID')} = ${total}%0A`;
-        }
-      });
-
-      const trx = document.getElementById("totalTrx").innerText;
-      const grand = document.getElementById("grandTotal").innerText;
-      const refund = document.getElementById("refund").value;
-      if (refund) {
-        pesan += `🥇Refund: Rp${(parseInt(refund)*1000).toLocaleString('id-ID')}%0A`;
-      }
-      pesan += `🧾Jumlah Transaksi: ${trx}%0A💰Total: ${grand}%0A`;
-      pesan += `💳 *PAYMENT*%0ASEABANK : 901516847602%0ADANA : 082236625627%0AA.N : AHMAD KHAIRUDIN%0AQRIS DI SINI 👉 rebrand.ly/QRIS-HR`;
-
-      const url = "https://wa.me/?text=" + encodeURI(pesan);
-      window.open(url, "_blank");
+    if (jumlah > 0 && harga > 0) {
+      pesan += `- ${nama.toUpperCase()}: ${jumlah} x Rp${(parseInt(harga) * 1000).toLocaleString('id-ID')} = ${total}\n`;
     }
+  });
+
+  const trx = document.getElementById("totalTrx").innerText;
+  const grand = document.getElementById("grandTotal").innerText;
+  const refund = document.getElementById("refund").value;
+
+  if (refund) {
+    pesan += `🎁 Refund: Rp${(parseInt(refund) * 1000).toLocaleString('id-ID')}\n`;
+  }
+
+  pesan += `🧮 Jumlah Transaksi: ${trx}\n💰 Total: ${grand}\n`;
+  pesan += `\n💳 *PAYMENT*\n`;
+  pesan += `SEABANK : 901516847602\n`;
+  pesan += `DANA : 082236625627\n`;
+  pesan += `A.N : AHMAD KHAIRUDIN\n`;
+  pesan += `QRIS DI SINI 👉 rebrand.ly/QRIS-HR`;
+
+  const url = "https://wa.me/?text=" + encodeURIComponent(pesan);
+  window.open(url, "_blank");
+}
+</script>
+
 
     document.addEventListener("DOMContentLoaded", function() {
       const tgl = new Date();
