@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kalkulator Transaksi</title>
   <style>
     body {
@@ -42,13 +41,12 @@
 
   <h2>Kalkulator Transaksi</h2>
 
-  
   <div style="text-align:center; margin-bottom: 20px;">
     <div id="tanggal" style="font-weight:bold; margin-bottom: 10px;"></div>
     <button onclick="kirimWhatsApp()" style="padding: 10px 20px; font-size: 16px;">Kirim ke WhatsApp</button>
   </div>
 
-<table>
+  <table>
     <thead>
       <tr>
         <th>PRODUK</th>
@@ -58,54 +56,18 @@
       </tr>
     </thead>
     <tbody id="productTable">
-      <tr>
-        <td>JUMBO</td>
-        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
-        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
-        <td class="total">Rp0</td>
-      </tr>
-      <tr>
-        <td>LITE</td>
-        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
-        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
-        <td class="total">Rp0</td>
-      </tr>
-      <tr>
-        <td>BIG</td>
-        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
-        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
-        <td class="total">Rp0</td>
-      </tr>
-      <tr>
-        <td>MINI</td>
-        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
-        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
-        <td class="total">Rp0</td>
-      </tr>
-      <tr>
-        <td>SPR-JMBO</td>
-        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
-        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
-        <td class="total">Rp0</td>
-      </tr>
-    
-      <tr>
-        <td><input type="text" placeholder="Produk" style="width:100%"></td>
-        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
-        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
-        <td class="total">Rp0</td>
-      </tr>
-      <tr>
-        <td><input type="text" placeholder="Produk" style="width:100%"></td>
-        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
-        <td><input type="number" min="0" value="" onfocus="this.value=''" onchange="hitung()"></td>
-        <td class="total">Rp0</td>
-      </tr>
-
-</tbody>
+      <tr><td>JUMBO</td><td><input type="number" min="0" value="" oninput="hitung()" onfocus="this.value=''"></td><td><input type="number" min="0" value="" oninput="hitung()" onfocus="this.value=''"></td><td class="total">Rp0</td></tr>
+      <tr><td>LITE</td><td><input type="number" min="0" value="" oninput="hitung()" onfocus="this.value=''"></td><td><input type="number" min="0" value="" oninput="hitung()" onfocus="this.value=''"></td><td class="total">Rp0</td></tr>
+      <tr><td>BIG</td><td><input type="number" min="0" value="" oninput="hitung()" onfocus="this.value=''"></td><td><input type="number" min="0" value="" oninput="hitung()" onfocus="this.value=''"></td><td class="total">Rp0</td></tr>
+      <tr><td>MINI</td><td><input type="number" min="0" value="" oninput="hitung()" onfocus="this.value=''"></td><td><input type="number" min="0" value="" oninput="hitung()" onfocus="this.value=''"></td><td class="total">Rp0</td></tr>
+      <tr><td>SPR-JMBO</td><td><input type="number" min="0" value="" oninput="hitung()" onfocus="this.value=''"></td><td><input type="number" min="0" value="" oninput="hitung()" onfocus="this.value=''"></td><td class="total">Rp0</td></tr>
+      <tr><td><input type="text" placeholder="Produk" style="width:100%"></td><td><input type="number" min="0" value="" oninput="hitung()" onfocus="this.value=''"></td><td><input type="number" min="0" value="" oninput="hitung()" onfocus="this.value=''"></td><td class="total">Rp0</td></tr>
+      <tr><td><input type="text" placeholder="Produk" style="width:100%"></td><td><input type="number" min="0" value="" oninput="hitung()" onfocus="this.value=''"></td><td><input type="number" min="0" value="" oninput="hitung()" onfocus="this.value=''"></td><td class="total">Rp0</td></tr>
+    </tbody>
     <tfoot>
       <tr>
-        <td colspan="3">REFUND / SALDO</td><td><input type="number" min="0" value="" id="refund" onfocus="this.value=''" onchange="hitung()"></td>
+        <td colspan="3">REFUND / SALDO</td>
+        <td><input type="number" min="0" value="" id="refund" oninput="hitung()" onfocus="this.value=''"></td>
       </tr>
       <tr>
         <td colspan="3">JUMLAH TRANSAKSI</td>
@@ -132,10 +94,8 @@
         const qty = parseInt(row.cells[1].querySelector("input").value) || 0;
         const harga = (parseInt(row.cells[2].querySelector("input").value) || 0) * 1000;
         const total = qty * harga;
-
         row.cells[3].innerText = formatRupiah(total);
-
-        jumlahTrx += jumlah;
+        jumlahTrx += qty;
         totalSemua += total;
       });
 
@@ -145,49 +105,44 @@
       document.getElementById("totalTrx").innerText = jumlahTrx;
     }
 
-    window.onload = hitung;
-  
-function kirimWhatsApp() {
-  let pesan = `📆 Tanggal: ${tanggal}\n📦 REKAPAN TRANSAKSI:`;
-  const rows = document.querySelectorAll("#productTable tr");
+    function kirimWhatsApp() {
+      const tgl = new Date();
+      const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+      const tanggal = tgl.toLocaleDateString('id-ID', options);
 
-  rows.forEach(row => {
-    const nama = row.cells[0].querySelector("input")?.value || row.cells[0].innerText;
-    const jumlah = row.cells[1].querySelector("input").value || 0;
-    const harga = row.cells[2].querySelector("input").value || 0;
-    const total = row.cells[3].innerText;
+      let pesan = `📆 Tanggal: ${tanggal}%0A📦 *REKAPAN TRANSAKSI*:%0A`;
+      const rows = document.querySelectorAll("#productTable tr");
 
-    if (jumlah > 0 && harga > 0) {
-      pesan += `- ${nama}: ${qty} x Rp${(parseInt(harga)*1000).toLocaleString('id-ID')} = ${total}%0A`;
+      rows.forEach(row => {
+        const nama = row.cells[0].querySelector("input")?.value || row.cells[0].innerText;
+        const jumlah = row.cells[1].querySelector("input").value || 0;
+        const harga = row.cells[2].querySelector("input").value || 0;
+        const total = row.cells[3].innerText;
+
+        if (jumlah > 0 && harga > 0) {
+          pesan += `- ${nama}: ${jumlah} x Rp${(parseInt(harga)*1000).toLocaleString('id-ID')} = ${total}%0A`;
+        }
+      });
+
+      const trx = document.getElementById("totalTrx").innerText;
+      const grand = document.getElementById("grandTotal").innerText;
+      const refund = document.getElementById("refund").value;
+      if (refund) {
+        pesan += `🥇Refund: Rp${(parseInt(refund)*1000).toLocaleString('id-ID')}%0A`;
+      }
+      pesan += `🧾Jumlah Transaksi: ${trx}%0A💰Total: ${grand}%0A`;
+      pesan += `💳 *PAYMENT*%0ASEABANK : 901516847602%0ADANA : 082236625627%0AA.N : AHMAD KHAIRUDIN%0AQRIS DI SINI 👉 rebrand.ly/QRIS-HR`;
+
+      const url = "https://wa.me/?text=" + encodeURI(pesan);
+      window.open(url, "_blank");
     }
-  });
 
-  const trx = document.getElementById("totalTrx").innerText;
-  const grand = document.getElementById("grandTotal").innerText;
-  const refund = document.getElementById("refund").value;
-  if (refund) {
-    pesan += `🥇Refund: Rp${(parseInt(refund)*1000).toLocaleString('id-ID')}%0A`;
-  }
-  pesan += `🧾Jumlah Transaksi: ${trx}%0A💰Total: ${grand}`;
- pesan += `
-💳 PAYMENT 
-SEABANK : 901516847602
-DANA : 082236625627
-A.N : AHMAD KHAIRUDIN
-QRIS DI SINI 👉 rebrand.ly/QRIS-HR`;
-  
-  const url = "https://wa.me/?text=" + pesan;
-  window.open(url, "_blank");
-}
+    document.addEventListener("DOMContentLoaded", function() {
+      const tgl = new Date();
+      const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+      document.getElementById("tanggal").innerText = "Tanggal: " + tgl.toLocaleDateString('id-ID', options);
+    });
+  </script>
 
-
-document.addEventListener("DOMContentLoaded", function() {
-  const tgl = new Date();
-  const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-  document.getElementById("tanggal").innerText = "Tanggal: " + tgl.toLocaleDateString('id-ID', options);
-});
-
-</script>
-  
 </body>
 </html>
