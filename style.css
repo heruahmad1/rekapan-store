@@ -1,0 +1,572 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 10px;
+  overflow-x: auto;
+}
+
+.container {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  min-width: 320px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  word-wrap: break-word;
+}
+
+/* Date Section */
+.date-section {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #555;
+  font-size: 0.85rem;
+}
+
+label input[type="date"] {
+  margin-left: 10px;
+  padding: 6px 10px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  background: white;
+  transition: all 0.3s ease;
+  width: auto;
+  max-width: 150px;
+}
+
+label input[type="date"]:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+}
+
+/* Produk Section */
+.produk-section {
+  margin: 20px 0;
+  overflow-x: auto;
+}
+
+/* Header - Always Visible */
+.produk-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 2px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: 700;
+  font-size: 0.75rem;
+  border-radius: 8px 8px 0 0;
+  padding: 8px 0;
+  margin-bottom: 0;
+  min-width: 320px;
+}
+
+.header-cell {
+  text-align: center;
+  padding: 6px 4px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Product Row - Grid Layout for All Devices */
+.produk-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 0;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #e0e0e0;
+  border-top: none;
+  border-radius: 0;
+  padding: 4px;
+  min-width: 320px;
+}
+
+.produk-row:first-child {
+  border-top: 1px solid #e0e0e0;
+}
+
+.produk-row:last-child {
+  border-radius: 0 0 8px 8px;
+  margin-bottom: 15px;
+}
+
+/* Hide input containers and labels since we're using grid */
+.input-container {
+  display: contents;
+}
+
+.input-group {
+  display: contents;
+}
+
+.input-label {
+  display: none;
+}
+
+/* Product Name */
+.produk-name {
+  background: #f8f9fa;
+  padding: 8px 4px;
+  border-radius: 4px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  font-size: 0.7rem;
+  margin: 2px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.2;
+}
+
+.produk-name-input {
+  background: #f8f9fa;
+  padding: 8px 4px;
+  border-radius: 4px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  font-style: italic;
+  font-size: 0.7rem;
+  margin: 2px;
+  width: calc(100% - 4px);
+}
+
+.produk-name-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 1px rgba(102, 126, 234, 0.1);
+  font-style: normal;
+}
+
+/* Input Fields */
+.produk-row input[type="number"] {
+  padding: 8px 4px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  text-align: center;
+  background: white;
+  transition: all 0.3s ease;
+  margin: 2px;
+  width: calc(100% - 4px);
+}
+
+.produk-row input[type="number"]:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 1px rgba(102, 126, 234, 0.1);
+}
+
+/* Subtotal */
+.subtotal {
+  background: #e8f5e8;
+  padding: 8px 4px;
+  border-radius: 4px;
+  text-align: center;
+  font-weight: 600;
+  color: #2e7d32;
+  border: 1px solid #c8e6c9;
+  font-size: 0.7rem;
+  margin: 2px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  line-height: 1.2;
+}
+
+/* Summary Section */
+.summary-section {
+  margin: 20px 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 10px;
+  padding: 12px;
+  color: white;
+  width: 100%;
+  overflow: hidden;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.summary-row:last-child {
+  border-bottom: none;
+}
+
+.summary-label {
+  font-weight: 600;
+  font-size: 0.75rem;
+  flex: 1;
+  min-width: 100px;
+}
+
+.summary-value {
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-align: right;
+}
+
+.total-value {
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+.refund-input {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  font-weight: 600;
+  width: 60px;
+  max-width: 60px;
+}
+
+.refund-input:focus {
+  outline: none;
+  background: white;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+/* WhatsApp Button */
+.whatsapp-button {
+  display: block;
+  width: 100%;
+  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  color: white;
+  text-decoration: none;
+  padding: 10px 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  margin-top: 15px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+  border: none;
+  cursor: pointer;
+}
+
+.whatsapp-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
+.whatsapp-button:active {
+  transform: translateY(0);
+}
+
+/* Tablet Design */
+@media (min-width: 481px) and (max-width: 768px) {
+  body {
+    padding: 15px;
+  }
+  
+  .container {
+    max-width: 600px;
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 1.6rem;
+  }
+  
+  label {
+    font-size: 0.9rem;
+  }
+  
+  label input[type="date"] {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    max-width: 180px;
+  }
+  
+  .produk-header {
+    font-size: 0.85rem;
+    padding: 10px 0;
+  }
+  
+  .header-cell {
+    padding: 8px 6px;
+  }
+  
+  .produk-row {
+    padding: 6px;
+  }
+  
+  .produk-name,
+  .produk-name-input {
+    padding: 10px 6px;
+    font-size: 0.8rem;
+  }
+  
+  .produk-row input[type="number"] {
+    padding: 10px 6px;
+    font-size: 0.8rem;
+  }
+  
+  .subtotal {
+    padding: 10px 6px;
+    font-size: 0.8rem;
+  }
+  
+  .summary-section {
+    padding: 16px;
+  }
+  
+  .summary-row {
+    padding: 8px 0;
+  }
+  
+  .summary-label {
+    font-size: 0.85rem;
+  }
+  
+  .summary-value {
+    font-size: 0.9rem;
+  }
+  
+  .total-value {
+    font-size: 1rem;
+  }
+  
+  .refund-input {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    width: 70px;
+  }
+  
+  .whatsapp-button {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Desktop Design */
+@media (min-width: 769px) {
+  body {
+    padding: 20px;
+  }
+  
+  .container {
+    max-width: 800px;
+    padding: 30px;
+    border-radius: 20px;
+  }
+  
+  h1 {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+  }
+  
+  label {
+    font-size: 1rem;
+  }
+  
+  label input[type="date"] {
+    padding: 10px 15px;
+    font-size: 1rem;
+    max-width: 200px;
+  }
+  
+  .produk-section {
+    margin: 30px 0;
+  }
+  
+  .produk-header {
+    font-size: 1rem;
+    padding: 15px 0;
+    gap: 10px;
+    border-radius: 10px 10px 0 0;
+  }
+  
+  .header-cell {
+    padding: 8px 0;
+  }
+  
+  .produk-row {
+    gap: 10px;
+    padding: 10px;
+  }
+  
+  .produk-name,
+  .produk-name-input {
+    padding: 15px 20px;
+    font-size: 1rem;
+  }
+  
+  .produk-row input[type="number"] {
+    padding: 15px;
+    font-size: 1rem;
+  }
+  
+  .subtotal {
+    padding: 15px;
+    font-size: 1rem;
+  }
+  
+  .summary-section {
+    margin: 30px 0;
+    padding: 20px;
+  }
+  
+  .summary-row {
+    padding: 12px 0;
+  }
+  
+  .summary-label {
+    font-size: 1rem;
+  }
+  
+  .summary-value {
+    font-size: 1.1rem;
+  }
+  
+  .total-value {
+    font-size: 1.4rem;
+  }
+  
+  .refund-input {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    width: 100px;
+  }
+  
+  .whatsapp-button {
+    padding: 16px 25px;
+    font-size: 1.1rem;
+    margin-top: 30px;
+  }
+}
+
+/* Extra Small Mobile - Still Grid Layout */
+@media (max-width: 360px) {
+  body {
+    padding: 8px;
+  }
+  
+  .container {
+    padding: 10px;
+    border-radius: 12px;
+  }
+  
+  h1 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+  
+  label {
+    font-size: 0.8rem;
+  }
+  
+  label input[type="date"] {
+    padding: 5px 8px;
+    font-size: 0.75rem;
+    max-width: 130px;
+  }
+  
+  .produk-header {
+    font-size: 0.65rem;
+    padding: 6px 0;
+    min-width: 300px;
+  }
+  
+  .header-cell {
+    padding: 4px 2px;
+  }
+  
+  .produk-row {
+    padding: 2px;
+    min-width: 300px;
+  }
+  
+  .produk-name,
+  .produk-name-input {
+    padding: 6px 2px;
+    font-size: 0.6rem;
+    margin: 1px;
+  }
+  
+  .produk-row input[type="number"] {
+    padding: 6px 2px;
+    font-size: 0.6rem;
+    margin: 1px;
+  }
+  
+  .subtotal {
+    padding: 6px 2px;
+    font-size: 0.6rem;
+    margin: 1px;
+  }
+  
+  .summary-section {
+    padding: 10px;
+    margin: 15px 0;
+  }
+  
+  .summary-row {
+    padding: 5px 0;
+  }
+  
+  .summary-label {
+    font-size: 0.7rem;
+    min-width: 80px;
+  }
+  
+  .summary-value {
+    font-size: 0.75rem;
+  }
+  
+  .total-value {
+    font-size: 0.85rem;
+  }
+  
+  .refund-input {
+    padding: 3px 6px;
+    font-size: 0.65rem;
+    width: 50px;
+  }
+  
+  .whatsapp-button {
+    padding: 8px 10px;
+    font-size: 0.75rem;
+    margin-top: 12px;
+  }
+}
+
