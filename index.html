@@ -735,20 +735,10 @@
 🙏 Terima kasih telah berbelanja di HR Store!`;
 
                 // Gunakan URL WhatsApp yang kompatibel
-                const whatsappURL = getWhatsAppURL(pesan);
-                
-                try {
-                    // Coba buka dengan URL yang sudah disesuaikan
-                    window.open(whatsappURL, "_blank");
-                } catch (error) {
-                    // Fallback jika gagal
-                    const fallbackURL = `https://wa.me/6282236625627?text=${encodeURIComponent(pesan)}`;
-                    window.open(fallbackURL, "_blank");
-                }
-                
-                btn.classList.remove('loading');
-            }, 1000);
-        }
+               const encodedMessage = encodeURIComponent(pesan);
+      const whatsappURL = `https://wa.me/?text=${encodedMessage}`;
+      window.open(whatsappURL, '_blank');
+    }
 
         // Initialize date and setup
         document.addEventListener("DOMContentLoaded", function() {
