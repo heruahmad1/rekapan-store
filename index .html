@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rekapan Penjualan Sederhana</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <div class="container">
+    <h1>Rekapan HR STORE</h1>
+    <form id="sales-form">
+      <label>
+        Tanggal:
+        <input type="date" id="tanggal">
+      </label>
+
+      <div class="produk-section">
+        <!-- Header Kolom -->
+        <div class="produk-header">
+          <div class="header-cell">Produk</div>
+          <div class="header-cell">Jumlah</div>
+          <div class="header-cell">Harga</div>
+          <div class="header-cell">Subtotal</div>
+        </div>
+
+        <!-- JUMBO -->
+        <div class="produk-row">
+          <div class="produk-name">JUMBO</div>
+          <input type="number" id="jumbo" placeholder="0">
+          <input type="number" id="harga-jumbo" placeholder="0">
+          <div class="subtotal" id="subtotal-jumbo">Rp0</div>
+        </div>
+
+        <!-- LITE -->
+        <div class="produk-row">
+          <div class="produk-name">LITE</div>
+          <input type="number" id="lite" placeholder="0">
+          <input type="number" id="harga-lite" placeholder="0">
+          <div class="subtotal" id="subtotal-lite">Rp0</div>
+        </div>
+
+        <!-- BIG -->
+        <div class="produk-row">
+          <div class="produk-name">BIG</div>
+          <input type="number" id="big" placeholder="0">
+          <input type="number" id="harga-big" placeholder="0">
+          <div class="subtotal" id="subtotal-big">Rp0</div>
+        </div>
+
+        <!-- MINI -->
+        <div class="produk-row">
+          <div class="produk-name">MINI</div>
+          <input type="number" id="mini" placeholder="0">
+          <input type="number" id="harga-mini" placeholder="0">
+          <div class="subtotal" id="subtotal-mini">Rp0</div>
+        </div>
+
+        <!-- SPR-JMBO -->
+        <div class="produk-row">
+          <div class="produk-name">SPR-JMBO</div>
+          <input type="number" id="spr-jmbo" placeholder="0">
+          <input type="number" id="harga-spr-jmbo" placeholder="0">
+          <div class="subtotal" id="subtotal-spr-jmbo">Rp0</div>
+        </div>
+
+        <!-- Produk Custom 1 -->
+        <div class="produk-row">
+          <input type="text" class="produk-name-input" id="nama-produk-1" placeholder="Nama Produk">
+          <input type="number" id="produk-1" placeholder="0">
+          <input type="number" id="harga-produk-1" placeholder="0">
+          <div class="subtotal" id="subtotal-produk-1">Rp0</div>
+        </div>
+
+        <!-- Produk Custom 2 -->
+        <div class="produk-row">
+          <input type="text" class="produk-name-input" id="nama-produk-2" placeholder="Nama Produk">
+          <input type="number" id="produk-2" placeholder="0">
+          <input type="number" id="harga-produk-2" placeholder="0">
+          <div class="subtotal" id="subtotal-produk-2">Rp0</div>
+        </div>
+      </div>
+<!-- WhatsApp Button -->
+      <a href="#" id="whatsapp-button" class="whatsapp-button" onclick="kirimWhatsApp()">Kirim ke WhatsApp</a>
+    </form>
+  </div>
+      <!-- Summary Section -->
+      <div class="summary-section">
+        <!-- Refund/Saldo -->
+        <div class="summary-row refund-row">
+          <div class="summary-label">
+            REFUND / SALDO (Ribu)
+          </div>
+          <input type="number" id="refund" placeholder="0" class="refund-input">
+        </div>
+
+        <!-- Jumlah Transaksi -->
+        <div class="summary-row transaksi-row">
+          <div class="summary-label">
+            JUMLAH TRANSAKSI
+          </div>
+          <div class="summary-value" id="jumlah-transaksi">0</div>
+        </div>
+
+        <!-- Total Keseluruhan -->
+        <div class="summary-row total-row">
+          <div class="summary-label">
+            TOTAL KESELURUHAN
+          </div>
+          <div class="summary-value total-value" id="total-keseluruhan">Rp0</div>
+        </div>
+      </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
